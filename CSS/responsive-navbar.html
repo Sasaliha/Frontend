@@ -13,18 +13,18 @@
         }
         nav{
             position: relative;
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
+            display: flex;  /* logo ve diğer elementler yanyana gelsin diye  */
+            justify-content: space-between;  /* elementlerin biri saga biri sola gitsin  */
+            padding: 10px;  /*elementler içerisi dogru gelsib, dibe yanasmasın*/
             height: 80px;
-            align-items: center;
+            align-items: center; /*yukarıdan asagı ortalansınlar*/
             background-color: bisque;
         }
 
         ul{
-            display: flex;
-            list-style: none;
-            gap: 15px;
+            display: flex; /*li leri yanyana dizer*/
+            list-style: none;  /*bastaki nokta işaretlerini kaldır*/
+            gap: 15px; /*aralarında boslık bırak*/
         }
 
         ul li a{
@@ -32,7 +32,7 @@
             padding: 10px;
         }
 
-        ul li a:hover{
+        ul li a:hover{   /* a elementinin üstüne geldiğimde */
             border: 1px solid;
             border-radius: 10px;
             background-color: darkslategray;
@@ -40,7 +40,7 @@
         }
 
         ul li a{
-            text-decoration: none;
+            text-decoration: none;  /*alt çizgileri kaldırdı*/
             color: black;
         } 
         
@@ -62,7 +62,7 @@
             }
 
             ul{
-                
+                position: absolute;
                 top: 80px;
                 display: none;
                 background-color: cadetblue;
