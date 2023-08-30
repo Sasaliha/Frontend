@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox</title>
+    <style>
+        *{
+            margin:0; 
+            padding:0;
+        }
+
+        .container{
+            
+         
+            display: flex; /*bütün elemalar blok özelliğini kaybetti ve yanya geldi, hepsi içerikler kadar yer kapladı, inline blok oldu*/
+           /* flex-direction: column; /*tam tersi bir sıralama yaptı*/
+            /*justify-content: center; /*elemanlar ortalanır ve yatayda sıralama yapar*/
+            /* justify-content: flex-start; elemanlar sola hizalanır */
+            /*justify-content: flex-end; /*sayfanın sagına hizalanır*/
+            /*justify-content: space-between; /*her eleman arasına esit bosluk koyarak hizalama yapar*/
+            /*justify-content: space-around; /*sag ve soldan yarısı kadar ortalar 2 katı bosluk*/
+            /*justify-content: space-evenly; /*sagdan soldan esit bosluk
+            flex-direction: row;
+            /* flex-direction: column; bütün itemler alt alta geldi */
+            /* flex-direction: column-reverse; sıralamayı ustten yaptı  */
+            flex-wrap: wrap; /*sayfaya sıgmayan elemalar otomatk olarak alt alta gelmiş olacak*/
+            justify-content: center;
+            /* flex-wrap: nowrap; tersten sıralama yaptı  */ 
+            align-items: center; /*baslangıctan hizalamaya baslar. justify content ve align item özelliklerni center yaparak itemı containerin tam ortasında ortalayabilioruz. bunu item a margin: auto diyerek de yapabilirdik*/ 
+            height: 500px;
+            background-color: orange;
+           /* padding: 15px;  /*arka zemin uzunlugu*/
+            /* align-items: stretch ; dikeyde sıralama özelliğidir  */
+            /*align-items: center; /*bu sekilde dediğimzde itemlerden birinin yüksekliğini degistirdiğimizde digerleri bundan etkilenmez, ancak strech dediğimzde diger butun itemler bundan etkilenir. ancak özel yükseklik verdiğiniz item strech desek de etkilenmez*/
+           /* align-items: flex-start;  */
+            /* align-items: flex-end; */
+           /* align-items: baseline; /*item yazılarını altından hizalama yaparak sırlar*/
+            
+
+        }
+        
+
+        .item{
+            background-color: chocolate;
+            padding: 30px; /*itemler arasındaki mesafe*/
+            /* margin: 30px; */
+            color: white;
+            font-size: 25px;
+            /*flex-grow: 1; hepsine containerdan esit alan verir, bütün ıtemlere farklı degerler verebiliriz, buna göre oranlama yaparak */
+            /* margin: auto; */
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: auto;
+            
+
+        }
+/*
+        .i1{
+            align-self: stretch;  /*alabilceği en yüksek yükslliği alsın
+            order:6;
+        }*/
+
+        /* .i2{
+            height: 200px; 
+            order:5;
+        }
+
+        .i3{
+            align-self: flex-start;
+            order:-2;
+        } */
+
+        /*.i4{
+            align-self: flex-end;
+            order:-1; /*en sondaki elemanı en basa alır
+        }*/
+
+        .i8{
+            /* flex: 1; */
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">item 1</div>
+        <!-- <div class="item">item 2</div>
+        <div class="item">item 3</div>
+        <div class="item">item 4</div>
+        <div class="item">item 5</div>
+        <div class="item">item 6</div>
+        <div class="item">item 7</div>
+        <div class="item i8">item 8</div> -->
+
+
+
+
+    </div>
+
+</body>
+</html>

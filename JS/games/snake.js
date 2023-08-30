@@ -16,7 +16,7 @@ let konum=20;
 let boyut=18;
 let elmaX=5; 
 let elmaY=5;
-let yilanUzunlugu=30; //yılan parcası baslangıcta 3 belirlendi
+let yilanUzunlugu=3; //yılan parcası baslangıcta 3 belirlendi
 let yilanParcalari=[] //parcaların x ve y konumlarını arrayda tutacagım
 let skor=0;
 let hiz=10;
@@ -196,7 +196,7 @@ function oyunBittiMi(){
         if(parca.x === x && parca.y===y){  //parcanın x ve y konumu yılanın konumu ile aynı ise
             can--;
             if(can===0){
-             
+                          
                 ctx.fillText(`⚡: 0`,canvasWidth-230,30);
            
                     oyunBitti = true;
