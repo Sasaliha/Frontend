@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>ToDo App</title>
+</head>
+<body>
+    <div>
+            
+        <input id="work" type="text" placeholder="Some work...">
+        <button onclick="save()">Save</button>
+    </div>
+    <hr>
+    <ul id="todo-list">       
+    </ul>
+
+    <script>
+        const todos=[];
+
+        function save(){
+            const inputElement=document.getElementById("work");
+            todos.push(inputElement.value);
+
+            let text="";
+            for(let v of todos){
+                text+=`<li>${v}</li><button>Delete</button>`
+            }
+
+            const ulElement= document.getElementById("todo-list");
+            ulElement.innerHTML=text;
+
+            inputElement.value="";
+            inputElement.focus();
+
+        }
+
+        const deleteToDo=()=>{
+
+
+        }
+    </script>
+</body>
+</html>
