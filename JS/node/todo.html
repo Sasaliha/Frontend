@@ -1,0 +1,213 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <title>Todo App</title> 
+    <!-- axios kullanmak için -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>   
+    <style>
+       
+    </style>
+</head>
+<body>
+
+<div id="addForm">
+    <input id="work" type="text" placeholder="some work...">
+    <button onclick="save()">Save</button>
+</div>
+
+<div id="updateForm" style="display: none;">
+    <input id="updateWork" type="text" placeholder="some work...">
+    <button onclick="update()">Update</button>
+    <button onclick="cancel()">Cancel </button>
+   
+</div>
+<hr>
+
+<ul id="todo-list"> 
+</ul>
+    
+
+    <!-- APİ NOTLAR-2 tane bilgisayı haberleşme için kullanılırdı
+    Api isteği yöntemleri
+    1)fetch: javascript tarafından verilen default api isteği yöntemleri
+    2)axios: ekstra kutuphane ile kullanılabilen api yöntemleri
+    3)jquery ajax: esktra bir kütüphane ile kullanılabilecek api yöntemleri -->
+
+    <!-- asenkron ve senkron programlama yönetmleri  , javascript bir asenkron programlama dilidir-->
+
+    <!-- restful apiler json formatı döner -->
+
+<script>
+    let todos=[];
+    let isUpdateFormActive=true;
+    let index=0;
+    let id=0;
+
+    showTrueForm();
+    getToDoListFromApi();
+
+    function getToDoListFromApi(){
+    //     fetch("http://localhost:5000/api/todos") //api adresini yani end pointi verdik
+    //         .then(res=> res.json()) //aldıgımız sonucu json formatına cevirdik
+    //         .then(todo=> {
+    //             console.log(todo);
+    //             todos=todo;
+    //             setULList();
+    //         });//fetch ten sonra alacagımız sonuca todo adını verdik. apiden gelen sonuc todo ya verdik ve console yazdırdık. 
+    //     
+    //         //fetch diğer api isteklerine nazaran aldıgı ilk isteği işleyemez ve json formatına ceviremez. o nedenle json a cevirmemiz gerekir.
+
+    //fetch yerine axios ile kodu yazdıyoruz
+
+    axios.get("http://localhost:5000/api/todos")
+    .then(res=> {
+        todos=res.data;
+        setULList();
+    });
+}     
+  
+
+    function deleteToDoFromApi(id){
+    //    //api isteği yazıyorum
+    //    fetch("http://localhost:5000/api/todos/remove"+id,{
+    //     method: "DELETE",
+    //     })
+    //     .then(res=> res.json())//bunu mutlaka yapmamız laızm
+    //     .then(data=>{
+    //         console.log(data);
+    //         getToDoListFromApi(); //apimi cekiyor ve listemi tekrardan olusturuyor
+    //     })
+    // 
+
+    //axios ile delete işlemi
+        axios.get("http://localhost:5000/api/todos/remove/" + id)
+        .then(data=>{
+        getToDoListFromApi();
+    })
+}
+
+  
+
+    //update ya da save butonlarının true/false olması
+    function showTrueForm(){
+
+        isUpdateFormActive = !isUpdateFormActive;
+
+        const addFormEl=document.getElementById("addForm");
+        const updateFormEl=document.getElementById("updateForm"); //id nin referansını set ettim
+        const operationsEl=document.querySelectorAll(".operations"); //classı operations olan tüm elemenleri bulur
+
+        if(isUpdateFormActive){ //true ise
+            addFormEl.style.display="none";
+            updateFormEl.style.display="block";
+           
+            for(let el of operationsEl){
+                el.style.display="none";
+            }
+
+        }else {
+            addFormEl.style.display="block";
+            updateFormEl.style.display="none";
+
+             for(let el of operationsEl){
+                el.style.display="block";
+            }
+        }
+    }
+
+    function save(){  //kayıt işlemini apiye cevirdim
+        const inputElement=document.getElementById("work"); //
+       
+        const value= inputElement.value; //params(...) operatörü: metoda sınırsız parametre gönderebilmek için kullanabliriz
+
+        //FETCH ile POST isteği
+        // fetch("http://localhost:5000/api/todos/create",{ //fetch ile beraber api isteği yaptıgım adresi yazdım
+        //     headers:{
+        //         "Content-Type":"application/json"
+        //     },
+        //     method: "POST", //methodumuuz belirtiyoruz
+        //     body: JSON.stringify({title: value}) //fetch de body kısmını direkt gönderemiyoruz, stringe cevirdik
+        // })
+        // .then (res=> res.json())
+        // .then (todo => {
+        //     getToDoListFromApi();
+        
+        // inputElement.value="";
+        // inputElement.focus();
+
+        // });
+
+
+        //AXIOS ile POST isteği 
+        axios.post("http://localhost:5000/api/todos/create",{title:value})
+        .then(res=>{
+            getToDoListFromApi();
+            inputElement.value="";
+            inputElement.focus();
+        });
+
+        
+        // for(let v of todos)
+        // {
+        //     text+=`<li>${v}</li><button>Delete</button> `
+        // }
+
+    }
+
+    const deleteToDo= (index) => {
+        todos.splice(index,1); /*baslangıc index numarasını ve kac kayıt sileceğini veriyoruz*/
+        setULList();
+    }
+
+    function setULList(){
+        let text="";
+        for(let i in todos)
+        {
+            const value=todos[i];
+            text += `
+            <li>${value.title}</li>
+        <div class="operations">
+            <button onclick="get(${i})">Update
+                </button>
+            <button onclick="deleteToDoFromApi(${value.id})">Delete
+                </button>
+        </div>`
+           
+        }
+
+        const ulElement=document.getElementById("todo-list");
+        ulElement.innerHTML = text
+    }
+
+    
+    
+    const updateWorkEl=document.querySelector("#updateWork"); //getElementById işlevinin aynısıdır, sadece selector # ile ifade edilir.
+    
+    
+    function get(i){ 
+        
+        showTrueForm();
+
+        updateWorkEl.value=todos[i].title;
+        index=i; //yukarıdaki index degerine parametredeki i degerini set ettik
+        id=todos[i].id;
+    }
+
+    function update(){
+        const value=updateWorkEl.value;
+        axios.post("http://localhost:5000/api/todos/update",{id: id,title:value})
+        .then(res=>{
+            showTrueForm();
+            getToDoListFromApi();
+        });
+      }
+
+    function cancel(){
+        showTrueForm();
+    }
+
+</script>
+
+    
+</body>
+</html>
