@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'AppServiceQS-rg'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_93F66FD96CB345849F86E5F9CB46A989 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6F12926BD55C4CD49CCA57DF281DB795 }}
           package: .
