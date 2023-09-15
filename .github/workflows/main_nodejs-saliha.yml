@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'nodejs-saliha'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_50D2E54B69C04473BC3937A2957055D6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E4B10E8E9BF0446997B6DBA57D1020AE }}
           package: .
